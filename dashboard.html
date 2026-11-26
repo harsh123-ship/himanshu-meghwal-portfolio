@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portfolio Analytics Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            background: #080c12;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+
+        h1 {
+            margin-bottom: 10px
+        }
+
+        .subtitle {
+            color: #8996a5;
+            margin-bottom: 30px;
+            font-size: 13px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .card {
+            background: #111a24;
+            border: 1px solid #27323e;
+            border-radius: 14px;
+            padding: 25px;
+        }
+
+        .card small {
+            color: #94a0ad;
+        }
+
+        .card h2 {
+            font-size: 35px;
+            margin-top: 15px;
+            color: #c8ff43;
+        }
+
+        .panel {
+            margin-top: 25px;
+            background: #111a24;
+            border: 1px solid #27323e;
+            border-radius: 14px;
+            padding: 25px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        td,
+        th {
+            padding: 13px;
+            border-bottom: 1px solid #28323c;
+            text-align: left;
+        }
+
+        th {
+            color: #c8ff43
+        }
+
+        .status {
+            color: #c8ff43;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+
+        @media(max-width:800px) {
+
+            .grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+        }
+
+        @media(max-width:500px) {
+
+            .grid {
+                grid-template-columns: 1fr
+            }
+
+            body {
+                padding: 15px
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Himanshu Meghwal</h1>
+
+    <p class="subtitle">
+        Real-Time Website Analytics
+    </p>
+
+    <div class="status" id="status">
+        ● Connecting to Python backend...
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <small>Total Visitors</small>
+            <h2 id="total">0</h2>
+        </div>
+
+        <div class="card">
+            <small>Today's Visitors</small>
+            <h2 id="today">0</h2>
+        </div>
+
+        <div class="card">
+            <small>Last 7 Days</small>
+            <h2 id="weekly">0</h2>
+        </div>
+
+        <div class="card">
+            <small>Last 30 Days</small>
+            <h2 id="monthly">0</h2>
+        </div>
+
+    </div>
+
+    <div class="panel">
+
+        <h3>Visitor Activity</h3>
+
+        <br>
+
+        <canvas id="visitorChart"></canvas>
+
+    </div>
+
+    <div class="panel">
+
+        <h3>Recent Website Activities</h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Visitor</th>
+                    <th>Page</th>
+                    <th>Event</th>
+                    <th>Device</th>
+                    <th>Time</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="activities">
+
+                <tr>
+                    <td colspan="5">Loading...</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <script>
+
+        let visitorChart = null;
+
+        const API = "/api/analytics";
+
+        async function updateDashboard() {
+
+            try {
+
+                const response = await fetch(API, {
+                    cache: "no-store"
+                });
+
+                if (!response.ok) {
+                    throw new Error("Analytics API Error");
+                }
+
+                const data = await response.json();
+
+                // UPDATE STATISTICS
+
+                document.getElementById("total").textContent =
+                    data.total_visitors ?? 0;
+
+                document.getElementById("today").textContent =
+                    data.today_visitors ?? 0;
+
+                document.getElementById("weekly").textContent =
+                    data.weekly_visitors ?? 0;
+
+                document.getElementById("monthly").textContent =
+                    data.monthly_visitors ?? 0;
+
+
+                // CONNECTION STATUS
+
+                document.getElementById("status").textContent =
+                    "● LIVE SERVER CONNECTED";
+
+
+                // PREPARE GRAPH DATA
+
+                const statistics = data.daily_statistics || [];
+
+                const labels = statistics.map(item => item.day);
+
+                const values = statistics.map(item =>
+                    Number(item.visits)
+                );
+
+
+                // GRAPH
+
+                const canvas = document.getElementById("visitorChart");
+
+                if (!canvas) {
+                    throw new Error("Chart canvas not found");
+                }
+
+                if (!visitorChart) {
+
+                    visitorChart = new Chart(canvas, {
+
+                        type: "line",
+
+                        data: {
+
+                            labels: labels,
+
+                            datasets: [{
+
+                                label: "Daily Visitors",
+
+                                data: values,
+
+                                borderColor: "#c8ff43",
+
+                                backgroundColor:
+                                    "rgba(200,255,67,0.12)",
+
+                                borderWidth: 3,
+
+                                fill: true,
+
+                                tension: 0.4,
+
+                                pointRadius: 5,
+
+                                pointHoverRadius: 9,
+
+                                pointBackgroundColor: "#c8ff43"
+
+                            }]
+
+                        },
+
+                        options: {
+
+                            responsive: true,
+
+                            maintainAspectRatio: true,
+
+                            interaction: {
+                                intersect: false,
+                                mode: "index"
+                            },
+
+                            plugins: {
+
+                                legend: {
+
+                                    display: true,
+
+                                    labels: {
+                                        color: "#ffffff"
+                                    }
+
+                                }
+
+                            },
+
+                            scales: {
+
+                                x: {
+
+                                    ticks: {
+                                        color: "#aab4c0"
+                                    },
+
+                                    grid: {
+                                        color: "rgba(255,255,255,0.05)"
+                                    }
+
+                                },
+
+                                y: {
+
+                                    beginAtZero: true,
+
+                                    suggestedMax: Math.max(
+                                        5,
+                                        ...values
+                                    ),
+
+                                    ticks: {
+                                        color: "#aab4c0",
+                                        precision: 0
+                                    },
+
+                                    grid: {
+                                        color: "rgba(255,255,255,0.05)"
+                                    }
+
+                                }
+
+                            }
+
+                        }
+
+                    });
+
+                } else {
+
+                    visitorChart.data.labels = labels;
+
+                    visitorChart.data.datasets[0].data = values;
+
+                    visitorChart.options.scales.y.suggestedMax =
+                        Math.max(5, ...values);
+
+                    visitorChart.update();
+
+                }
+
+
+                // RECENT ACTIVITIES
+
+                const table = document.getElementById("activities");
+
+                table.innerHTML = "";
+
+                const activities = data.recent_activities || [];
+
+                if (!activities.length) {
+
+                    table.innerHTML =
+                        "<tr><td colspan='5'>No activities recorded yet.</td></tr>";
+
+                }
+
+                activities.forEach(item => {
+
+                    const row = document.createElement("tr");
+
+                    const fields = [
+
+                        String(item.visitor_id || "").slice(0, 12),
+
+                        item.page || "/",
+
+                        item.event || "page_view",
+
+                        item.device || "Unknown",
+
+                        item.created_at || ""
+
+                    ];
+
+                    fields.forEach(value => {
+
+                        const cell = document.createElement("td");
+
+                        cell.textContent = value;
+
+                        row.appendChild(cell);
+
+                    });
+
+                    table.appendChild(row);
+
+                });
+
+
+            } catch (error) {
+
+                console.error("Dashboard Error:", error);
+
+                document.getElementById("status").textContent =
+                    "● CONNECTION ERROR";
+
+            }
+
+        }
+
+
+        // INITIAL LOAD
+
+        updateDashboard();
+
+
+        // AUTOMATIC REFRESH EVERY 5 SECONDS
+
+        setInterval(updateDashboard, 5000);
+
+    </script>
+
+</body>
+
+</html>
