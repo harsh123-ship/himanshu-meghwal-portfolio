@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#080c12">
+
+    <meta name="description" content="Himanshu Meghwal - Security Number Plate and RTO Professional, Kota Rajasthan.">
+
+    <title>Himanshu Meghwal | Professional Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+
+            --background: #080c12;
+            --surface: #101720;
+            --surface2: #151f2b;
+            --primary: #c8ff43;
+            --secondary: #53dcff;
+            --text: #f4f7fa;
+            --muted: #8d9aa9;
+            --border: rgba(255, 255, 255, .09);
+
+        }
+
+        * {
+
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+        body {
+
+            background: var(--background);
+            color: var(--text);
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+
+        }
+
+        a {
+
+            text-decoration: none;
+            color: inherit;
+
+        }
+
+        button {
+
+            font-family: inherit;
+
+        }
+
+        .container {
+
+            width: min(1250px, 92%);
+            margin: auto;
+
+        }
+
+        header {
+
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(8, 12, 18, .85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+
+        }
+
+        nav {
+
+            height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+
+        .logo {
+
+            font-family: 'Space Grotesk';
+            font-size: 21px;
+            font-weight: 700;
+
+        }
+
+        .logo span {
+
+            color: var(--primary);
+
+        }
+
+        .nav-links {
+
+            display: flex;
+            gap: 30px;
+            align-items: center;
+
+        }
+
+        .nav-links a {
+
+            font-size: 12px;
+            color: #bdc8d1;
+            transition: .3s;
+
+        }
+
+        .nav-links a:hover {
+
+            color: var(--primary);
+
+        }
+
+        .nav-contact {
+
+            padding: 13px 20px;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            color: var(--primary) !important;
+
+        }
+
+        .hero {
+
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 110px;
+
+        }
+
+        .hero-grid {
+
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 50px;
+            align-items: center;
+
+        }
+
+        .badge {
+
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 10px;
+            color: var(--muted);
+            margin-bottom: 30px;
+
+        }
+
+        .badge i {
+
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--primary);
+
+        }
+
+        .hero h1 {
+
+            font-family: 'Space Grotesk';
+            font-size: clamp(60px, 8vw, 105px);
+            line-height: .98;
+            letter-spacing: -6px;
+
+        }
+
+        .hero h1 span {
+
+            color: var(--primary);
+
+        }
+
+        .role {
+
+            font-size: 19px;
+            font-weight: 700;
+            margin-top: 25px;
+
+        }
+
+        .description {
+
+            font-size: 14px;
+            line-height: 2;
+            color: var(--muted);
+            max-width: 530px;
+            margin-top: 20px;
+
+        }
+
+        .buttons {
+
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 35px;
+
+        }
+
+        .btn {
+
+            display: inline-flex;
+            padding: 16px 23px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            transition: .3s;
+
+        }
+
+        .btn-primary {
+
+            background: var(--primary);
+            color: #080c12;
+
+        }
+
+        .btn-secondary {
+
+            border: 1px solid var(--border);
+
+        }
+
+        .btn:hover {
+
+            transform: translateY(-5px);
+
+        }
+
+        .profile {
+
+            position: relative;
+            max-width: 400px;
+            margin: auto;
+
+        }
+
+        .profile img {
+
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            object-position: center 25%;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            box-shadow: 0 30px 100px #0009;
+
+        }
+
+        .profile:before {
+
+            content: "";
+            position: absolute;
+            inset: -15px;
+            border: 1px solid rgba(200, 255, 67, .25);
+            border-radius: 35px;
+            z-index: -1;
+            animation: pulse 4s infinite;
+
+        }
+
+        @keyframes pulse {
+
+            50% {
+                transform: scale(1.035);
+                opacity: .4;
+            }
+
+        }
+
+        .stats {
+
+            display: flex;
+            gap: 40px;
+            margin-top: 55px;
+
+        }
+
+        .stat h2 {
+
+            font-family: 'Space Grotesk';
+            font-size: 32px;
+            color: var(--primary);
+
+        }
+
+        .stat p {
+
+            font-size: 9px;
+            color: var(--muted);
+            margin-top: 5px;
+            text-transform: uppercase;
+
+        }
+
+        section {
+
+            padding: 110px 0;
+            border-top: 1px solid var(--border);
+
+        }
+
+        .section-tag {
+
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: var(--primary);
+            font-weight: 800;
+
+        }
+
+        .section-title {
+
+            font-family: 'Space Grotesk';
+            font-size: clamp(38px, 6vw, 65px);
+            letter-spacing: -3px;
+            margin-top: 20px;
+
+        }
+
+        .section-title span {
+
+            color: var(--primary);
+
+        }
+
+        .section-description {
+
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 2;
+            max-width: 650px;
+            margin-top: 20px;
+
+        }
+
+        .about-grid {
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 50px;
+
+        }
+
+        .card {
+
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 30px;
+            transition: .3s;
+
+        }
+
+        .card:hover {
+
+            transform: translateY(-7px);
+            border-color: rgba(200, 255, 67, .4);
+
+        }
+
+        .card h3 {
+
+            font-family: 'Space Grotesk';
+            font-size: 24px;
+            margin-bottom: 15px;
+
+        }
+
+        .card p {
+
+            font-size: 12px;
+            line-height: 2;
+            color: var(--muted);
+
+        }
+
+        .details {
+
+            margin-top: 25px;
+
+        }
+
+        .detail {
+
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 15px 0;
+            border-top: 1px solid var(--border);
+            font-size: 11px;
+
+        }
+
+        .detail span {
+
+            color: var(--muted);
+
+        }
+
+        .service-grid {
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 50px;
+
+        }
+
+        .service-number {
+
+            font-family: 'Space Grotesk';
+            font-size: 35px;
+            color: var(--primary);
+            margin-bottom: 25px;
+
+        }
+
+        .service-card h3 {
+
+            font-size: 20px;
+            margin-bottom: 15px;
+
+        }
+
+        .service-card p {
+
+            font-size: 12px;
+            line-height: 2;
+            color: var(--muted);
+
+        }
+
+        .experience {
+
+            margin-top: 50px;
+            border-top: 1px solid var(--border);
+
+        }
+
+        .experience-item {
+
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border);
+
+        }
+
+        .experience-item h3 {
+
+            font-family: 'Space Grotesk';
+            font-size: 23px;
+
+        }
+
+        .experience-item p {
+
+            font-size: 12px;
+            line-height: 2;
+            color: var(--muted);
+            margin-top: 12px;
+
+        }
+
+        .location-box {
+
+            margin-top: 45px;
+            padding: 40px;
+            border-radius: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+
+        }
+
+        .location-box h3 {
+
+            font-family: 'Space Grotesk';
+            font-size: 40px;
+
+        }
+
+        .contact-grid {
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 45px;
+
+        }
+
+        .contact-item {
+
+            padding: 25px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+        }
+
+        .contact-item small {
+
+            color: var(--muted);
+            font-size: 10px;
+
+        }
+
+        .contact-item h3 {
+
+            font-size: 14px;
+            margin-top: 12px;
+            word-break: break-word;
+
+        }
+
+        footer {
+
+            padding: 35px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 10px;
+            color: var(--muted);
+
+        }
+
+        .reveal {
+
+            opacity: 0;
+            transform: translateY(25px);
+            transition: .8s;
+
+        }
+
+        .reveal.visible {
+
+            opacity: 1;
+            transform: translateY(0);
+
+        }
+
+        @media(max-width:850px) {
+
+            .hero-grid,
+            .about-grid,
+            .contact-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .profile {
+
+                max-width: 330px;
+                margin-top: 40px;
+
+            }
+
+            .service-grid {
+
+                grid-template-columns: 1fr 1fr;
+
+            }
+
+            .nav-links {
+
+                gap: 12px;
+
+            }
+
+        }
+
+        @media(max-width:600px) {
+
+            .nav-links a:not(.nav-contact) {
+
+                display: none;
+
+            }
+
+            .hero h1 {
+
+                font-size: 62px;
+                letter-spacing: -4px;
+
+            }
+
+            .service-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .stats {
+
+                gap: 20px;
+
+            }
+
+            section {
+
+                padding: 75px 0;
+
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="container">
+
+            <a href="#home" class="logo">
+                HIMANSHU<span>.</span>
+            </a>
+
+            <div class="nav-links">
+
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Expertise</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact">Contact</a>
+
+                <a href="#contact" class="nav-contact">
+                    Let's Connect ↗
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="container hero-grid">
+
+                <div class="reveal">
+
+                    <div class="badge">
+                        <i></i>
+                        PROFESSIONAL PORTFOLIO · 2026
+                    </div>
+
+                    <h1>
+                        Himanshu
+                        <span>Meghwal.</span>
+                    </h1>
+
+                    <div class="role">
+                        Security Number Plate & RTO Professional
+                    </div>
+
+                    <p class="description">
+
+                        Welcome to my professional portfolio.
+
+                        My name is Himanshu Meghwal. I have approximately
+                        2.5 years of practical experience in the Security
+                        Number Plate and RTO-related work sector.
+
+                        I am associated with Shimnit Company and based
+                        in Kunhadi, Kota, Rajasthan.
+
+                        This website presents my professional background,
+                        work experience and contact information.
+
+                    </p>
+
+                    <div class="buttons">
+
+                        <a href="#about" class="btn btn-primary">
+                            Explore My Profile ↗
+                        </a>
+
+                        <a href="#contact" class="btn btn-secondary">
+                            Contact Me
+                        </a>
+
+                    </div>
+
+                    <div class="stats">
+
+                        <div class="stat">
+                            <h2>2.5+</h2>
+                            <p>Years Experience</p>
+                        </div>
+
+                        <div class="stat">
+                            <h2>HSRP</h2>
+                            <p>Work Sector</p>
+                        </div>
+
+                        <div class="stat">
+                            <h2>Kota</h2>
+                            <p>Location</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="profile reveal">
+
+                    <img src="/static/profile.jpg" alt="Himanshu Meghwal professional portrait">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="about">
+
+            <div class="container">
+
+                <div class="section-tag">
+                    01 / ABOUT ME
+                </div>
+
+                <h2 class="section-title">
+                    Professional identity.
+                    <span>Personal dedication.</span>
+                </h2>
+
+                <p class="section-description">
+
+                    I believe professional growth comes from practical
+                    experience, consistency and a responsible approach
+                    towards work.
+
+                    My professional journey is connected with the
+                    Security Number Plate and RTO-related service sector.
+
+                </p>
+
+                <div class="about-grid">
+
+                    <div class="card">
+
+                        <h3>Who I Am</h3>
+
+                        <p>
+
+                            I am Himanshu Meghwal, a professional associated
+                            with Security Number Plate and RTO-related work.
+
+                            With approximately 2.5 years of experience,
+                            I have developed practical familiarity with
+                            this industry.
+
+                            I am associated with Shimnit Company.
+
+                        </p>
+
+                    </div>
+
+                    <div class="card">
+
+                        <h3>Professional Details</h3>
+
+                        <div class="details">
+
+                            <div class="detail">
+                                <span>Name</span>
+                                <strong>Himanshu Meghwal</strong>
+                            </div>
+
+                            <div class="detail">
+                                <span>Experience</span>
+                                <strong>2.5 Years</strong>
+                            </div>
+
+                            <div class="detail">
+                                <span>Company</span>
+                                <strong>Shimnit</strong>
+                            </div>
+
+                            <div class="detail">
+                                <span>Industry</span>
+                                <strong>HSRP / RTO</strong>
+                            </div>
+
+                            <div class="detail">
+                                <span>Location</span>
+                                <strong>Kunhadi, Kota</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="services">
+
+            <div class="container">
+
+                <div class="section-tag">
+                    02 / PROFESSIONAL EXPERTISE
+                </div>
+
+                <h2 class="section-title">
+                    My field of
+                    <span>experience.</span>
+                </h2>
+
+                <p class="section-description">
+
+                    My professional background is focused on
+                    Security Number Plate and RTO-related work.
+
+                </p>
+
+                <div class="service-grid">
+
+                    <div class="card service-card">
+
+                        <div class="service-number">01</div>
+
+                        <h3>Security Number Plates</h3>
+
+                        <p>
+
+                            Experience in the High Security Registration
+                            Plate (HSRP) work sector and related services.
+
+                        </p>
+
+                    </div>
+
+                    <div class="card service-card">
+
+                        <div class="service-number">02</div>
+
+                        <h3>RTO Related Work</h3>
+
+                        <p>
+
+                            Professional exposure to RTO-related work
+                            and vehicle registration service coordination.
+
+                        </p>
+
+                    </div>
+
+                    <div class="card service-card">
+
+                        <div class="service-number">03</div>
+
+                        <h3>Company Experience</h3>
+
+                        <p>
+
+                            Professional association with Shimnit Company
+                            and practical industry experience.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="experience">
+
+            <div class="container">
+
+                <div class="section-tag">
+                    03 / EXPERIENCE
+                </div>
+
+                <h2 class="section-title">
+                    My professional
+                    <span>journey.</span>
+                </h2>
+
+                <div class="experience">
+
+                    <div class="experience-item">
+
+                        <h3>Security Number Plate & RTO Professional</h3>
+
+                        <p>
+
+                            Approximately 2.5 years of practical
+                            professional experience in the relevant
+                            work sector.
+
+                        </p>
+
+                    </div>
+
+                    <div class="experience-item">
+
+                        <h3>Shimnit Company</h3>
+
+                        <p>
+
+                            Company association as provided for
+                            this professional portfolio.
+
+                        </p>
+
+                    </div>
+
+                    <div class="experience-item">
+
+                        <h3>Kunhadi, Kota, Rajasthan</h3>
+
+                        <p>
+
+                            Professional location reference:
+                            Putraji's Office, Kunhadi, Kota.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="location">
+
+            <div class="container">
+
+                <div class="section-tag">
+                    04 / LOCATION
+                </div>
+
+                <h2 class="section-title">
+                    Based in
+                    <span>Kota, Rajasthan.</span>
+                </h2>
+
+                <div class="location-box">
+
+                    <h3>Kunhadi, Kota</h3>
+
+                    <p class="section-description">
+
+                        Landmark: Putraji's Office
+
+                        Kota, Rajasthan, India.
+
+                    </p>
+
+                    <br>
+
+                    <a class="btn btn-primary"
+                        href="https://www.google.com/maps/search/?api=1&query=Kunhadi+Kota+Rajasthan" target="_blank"
+                        rel="noopener">
+
+                        Open Google Maps ↗
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="contact">
+
+            <div class="container">
+
+                <div class="section-tag">
+                    05 / CONTACT
+                </div>
+
+                <h2 class="section-title">
+                    Let's connect
+                    <span>professionally.</span>
+                </h2>
+
+                <p class="section-description">
+
+                    For professional enquiries, work-related
+                    communication and other relevant discussions,
+                    please contact me directly.
+
+                </p>
+
+                <div class="contact-grid">
+
+                    <div class="contact-item">
+                        <small>PHONE NUMBER</small>
+                        <h3>+91 97841 15692</h3>
+                    </div>
+
+                    <div class="contact-item">
+                        <small>EMAIL ADDRESS</small>
+                        <h3>himanshumeghwal735@gmail.com</h3>
+                    </div>
+
+                    <div class="contact-item">
+                        <small>LOCATION</small>
+                        <h3>Kunhadi, Kota, Rajasthan</h3>
+                    </div>
+
+                    <div class="contact-item">
+                        <small>COMPANY</small>
+                        <h3>Shimnit</h3>
+                    </div>
+
+                </div>
+
+                <div class="buttons">
+
+                    <a class="btn btn-primary" href="https://wa.me/919784115692" target="_blank" rel="noopener">
+
+                        WhatsApp Me ↗
+
+                    </a>
+
+                    <a class="btn btn-secondary" href="tel:+919784115692">
+
+                        Call Now ↗
+
+                    </a>
+
+                    <a class="btn btn-secondary" href="mailto:himanshumeghwal735@gmail.com">
+
+                        Send Email ↗
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        © <span id="year"></span> Himanshu Meghwal.
+        All Rights Reserved.
+
+    </footer>
+
+
+    <script>
+
+        // Current year
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+
+        // Scroll animations
+
+        const observer = new IntersectionObserver(entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll(".reveal").forEach(el => {
+
+            observer.observe(el);
+
+        });
+
+
+        // Generate anonymous visitor ID
+
+        let visitorID = localStorage.getItem("hm_visitor");
+
+        if (!visitorID) {
+
+            visitorID = crypto.randomUUID();
+
+            localStorage.setItem("hm_visitor", visitorID);
+
+        }
+
+
+        // Device information
+
+        const device = /Mobi|Android/i.test(navigator.userAgent)
+            ? "Mobile" : "Desktop";
+
+        const browser = navigator.userAgent;
+
+
+        // Track page view
+
+        async function trackActivity(eventName) {
+
+            try {
+
+                await fetch("/api/track", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        visitor_id: visitorID,
+
+                        page: location.pathname,
+
+                        event: eventName,
+
+                        device: device,
+
+                        browser: browser
+
+                    })
+
+                });
+
+            } catch (error) {
+
+                console.error("Analytics unavailable", error);
+
+            }
+
+        }
+
+        trackActivity("page_view");
+
+
+        // Track important actions
+
+        document.querySelectorAll("a[href^='mailto:'],a[href^='tel:'],a[href*='wa.me']").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                trackActivity("contact_click");
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
